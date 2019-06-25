@@ -123,4 +123,18 @@ class Matrix{
 		return temp;
 		
 	}
+	//apply a function to every value in the matrix
+	map(func)
+	{
+		for(var i in this.matrix)
+		{
+			for(var g in this.matrix[i])
+			{
+				let val = this.matrix[i][g];
+				this.matrix[i][g] = func(val);
+			}
+			
+		}
+		
+	}
 }
