@@ -113,4 +113,14 @@ class Matrix{
 		return temp;
 		
 	}
+	static fromArray(arr)
+	{
+		let temp = new Matrix(arr.length,1);
+		for(let i=0;i<arr.length;i++)
+		{
+			temp.matrix[i][0] = arr[i];
+		}
+		return temp;
+		
+	}
 }
