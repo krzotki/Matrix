@@ -26,7 +26,8 @@ class Matrix{
 		{
 			for(let y=0;y<this.cols;y++)
 			{
-				this.matrix[x][y] = Math.floor(Math.random()*10);
+				this.matrix[x][y] = Math.random()*2 -1;
+				//values prepared for neural network
 			}
 		}
 	}
