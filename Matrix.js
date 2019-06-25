@@ -123,6 +123,21 @@ class Matrix{
 		return temp;
 		
 	}
+	toArray()
+	{
+		let temp = [];
+		for(var i in this.matrix)
+		{
+			for(var g in this.matrix[i])
+			{
+				let val = this.matrix[i][g];
+			 	temp.push(this.matrix[i][g]);
+			}
+		}
+		return temp;
+	}
+	
+	
 	//apply a function to every value in the matrix
 	map(func)
 	{
