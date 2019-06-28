@@ -9,7 +9,6 @@ class Matrix{
 	}
 	initiate()
 	{
-		
 		for(let x=0;x<this.rows;x++)
 		{
 			this.matrix[x] = [];
@@ -31,87 +30,106 @@ class Matrix{
 			}
 		}
 	}
-	add(n)
+	static add(input,n)
 	{
-		var temp = new Matrix(this.rows,this.cols);
+		var temp = new Matrix(input.rows,input.cols);
 		if(n instanceof Matrix)
 		{
-			if(n.rows != this.rows || n.cols != this.cols) return undefined;
-			for(let x=0;x<this.rows;x++)
+			if(n.rows != input.rows || n.cols != input.cols) return undefined;
+			for(let x=0;x<input.rows;x++)
 			{
-				for(let y=0;y<this.cols;y++)
+				for(let y=0;y<input.cols;y++)
 				{
-					temp.matrix[x][y] =  this.matrix[x][y] + n.matrix[x][y];
+					temp.matrix[x][y] =  input.matrix[x][y] + n.matrix[x][y];
 				}
 			}
 		}
 		else
 		{
-			for(let x=0;x<this.rows;x++)
+			for(let x=0;x<input.rows;x++)
 			{
-				for(let y=0;y<this.cols;y++)
+				for(let y=0;y<input.cols;y++)
 				{
-
-					temp.matrix[x][y] = this.matrix[x][y] + n;
+					temp.matrix[x][y] = input.matrix[x][y] + n;
 				}
 			}
 		}
 		return temp;
 	}
-	multiply(n)
+	static subtract(input,n)
 	{
-		
+		var temp = new Matrix(input.rows,input.cols);
 		if(n instanceof Matrix)
 		{
-			
-			if(this.cols !== n.rows)
+			if(n.rows != input.rows || n.cols != input.cols) return undefined;
+			for(let x=0;x<input.rows;x++)
+			{
+				for(let y=0;y<input.cols;y++)
+				{
+					temp.matrix[x][y] =  input.matrix[x][y] - n.matrix[x][y];
+				}
+			}
+		}
+		else
+		{
+			for(let x=0;x<input.rows;x++)
+			{
+				for(let y=0;y<input.cols;y++)
+				{
+					temp.matrix[x][y] = input.matrix[x][y] + n;
+				}
+			}
+		}
+		return temp;
+	}
+	static multiply(input,n)
+	{
+		if(n instanceof Matrix)
+		{
+			if(input.cols !== n.rows)
 			{
 				console.log("Colums of A must match rows rows of B to create product");
 				return undefined;
 			} 
 			//product of 2 matrices
-			var temp = new Matrix(this.rows,n.cols);
+			var temp = new Matrix(input.rows,n.cols);
 			for(let x=0;x<temp.rows;x++)
 			{
 				for(let y =0;y<temp.cols;y++)
 				{
 					var sum =0;
-					for(var g=0;g<this.cols;g++)
+					for(var g=0;g<input.cols;g++)
 					{
-						sum+= this.matrix[x][g] * n.matrix[g][y];
-						
+						sum+= input.matrix[x][g] * n.matrix[g][y];
 					}
-
 					temp.matrix[x][y] = sum;
 				}	
 			}
 		}
 		else
 		{
-			var temp = new Matrix(this.rows,this.cols);
-			for(let x=0;x<this.rows;x++)
+			var temp = new Matrix(input.rows,input.cols);
+			for(let x=0;x<input.rows;x++)
 			{
-				for(let y=0;y<this.cols;y++)
+				for(let y=0;y<input.cols;y++)
 				{
-					temp.matrix[x][y] = this.matrix[x][y] * n;
+					temp.matrix[x][y] = input.matrix[x][y] * n;
 				}
 			}
 		}
 		return temp;
 	}
-	transpose()
+	static transpose(input)
 	{
-		var temp = new Matrix(this.cols,this.rows);
+		var temp = new Matrix(input.cols,input.rows);
 		for(var i =0;i<temp.rows;i++)
 		{
 			for(var x=0;x<temp.cols;x++)
 			{
-				temp.matrix[i][x] = this.matrix[x][i];
+				temp.matrix[i][x] = input.matrix[x][i];
 			}
-			
 		}
 		return temp;
-		
 	}
 	static fromArray(arr)
 	{
@@ -123,33 +141,29 @@ class Matrix{
 		return temp;
 		
 	}
-	toArray()
+	static toArray(input)
 	{
 		let temp = [];
-		for(var i in this.matrix)
+		for(var i in input.matrix)
 		{
-			for(var g in this.matrix[i])
+			for(var g in input.matrix[i])
 			{
-				let val = this.matrix[i][g];
-			 	temp.push(this.matrix[i][g]);
+				let val = input.matrix[i][g];
+			 	temp.push(input.matrix[i][g]);
 			}
 		}
 		return temp;
 	}
-	
-	
 	//apply a function to every value in the matrix
-	map(func)
+	static map(input,func)
 	{
-		for(var i in this.matrix)
+		for(var i in input.matrix)
 		{
-			for(var g in this.matrix[i])
+			for(var g in input.matrix[i])
 			{
-				let val = this.matrix[i][g];
-				this.matrix[i][g] = func(val);
+				let val = input.matrix[i][g];
+				input.matrix[i][g] = func(val);
 			}
-			
 		}
-		
 	}
 }
