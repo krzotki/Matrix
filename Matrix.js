@@ -88,6 +88,27 @@ class Matrix{
 		}
 		return temp;
 	}
+	
+	static EWMultiply(input,n)
+	{
+		var temp = new Matrix(input.rows,input.cols);
+		if(n instanceof Matrix)
+		{
+			if(n.rows != input.rows || n.cols != input.cols)
+			{
+				console.log("Dimensions must be the same");
+			}
+			for(let x=0;x<input.rows;x++)
+			{
+				for(let y=0;y<input.cols;y++)
+				{
+					temp.matrix[x][y] =  input.matrix[x][y] * n.matrix[x][y];
+				}
+			}
+		}
+		return temp;
+	}
+	
 	static multiply(input,n)
 	{
 		if(n instanceof Matrix)
