@@ -35,7 +35,10 @@ class Matrix{
 		var temp = new Matrix(input.rows,input.cols);
 		if(n instanceof Matrix)
 		{
-			if(n.rows != input.rows || n.cols != input.cols) return undefined;
+			if(n.rows != input.rows || n.cols != input.cols)
+			{
+				console.log("Dimensions must be the same");
+			}
 			for(let x=0;x<input.rows;x++)
 			{
 				for(let y=0;y<input.cols;y++)
@@ -61,7 +64,10 @@ class Matrix{
 		var temp = new Matrix(input.rows,input.cols);
 		if(n instanceof Matrix)
 		{
-			if(n.rows != input.rows || n.cols != input.cols) return undefined;
+			if(n.rows != input.rows || n.cols != input.cols)
+			{
+				console.log("Dimensions must be the same");
+			}
 			for(let x=0;x<input.rows;x++)
 			{
 				for(let y=0;y<input.cols;y++)
@@ -157,13 +163,15 @@ class Matrix{
 	//apply a function to every value in the matrix
 	static map(input,func)
 	{
+		let temp = new Matrix(input.rows,input.cols);
 		for(var i in input.matrix)
 		{
 			for(var g in input.matrix[i])
 			{
 				let val = input.matrix[i][g];
-				input.matrix[i][g] = func(val);
+				temp.matrix[i][g] = func(val);
 			}
 		}
+		return temp;
 	}
 }
